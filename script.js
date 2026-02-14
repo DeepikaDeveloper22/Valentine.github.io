@@ -42,12 +42,19 @@ function stopAllFolderMusic() {
   });
 }
 
-// Toggles background music on button click
+// 🎧 **Updated background music toggle**
 bgMusicToggle.addEventListener("click", () => {
+  // Stop any folder music first
+  stopAllFolderMusic();
+
   if (bgMusic.paused) {
-    stopAllFolderMusic();     // make sure no folder audio plays first
-    bgMusic.play().catch(() => {});
-    bgMusicToggle.textContent = "🔇 Pause Music";
+    // Make sure the audio is loaded before play
+    bgMusic.load();
+    bgMusic.play().then(() => {
+      bgMusicToggle.textContent = "🔇 Pause Music";
+    }).catch(err => {
+      console.warn("Unable to play background music:", err);
+    });
   } else {
     stopBackgroundMusic();
   }
@@ -79,7 +86,6 @@ openFolderBtn.addEventListener("click", () => {
   stopBackgroundMusic();
 
   if (userInput === correctPassword) {
-    // Show content
     document.getElementById(activeFolderId).classList.remove("hidden");
     folderPasswordInput.value = "";
 
