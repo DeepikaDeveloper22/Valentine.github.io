@@ -1,3 +1,4 @@
+// Passwords for folders
 const folderPasswords = {
   "folder-photos": "1222",
   "folder-notes": "141015",
@@ -9,9 +10,11 @@ const folderPasswordInput = document.getElementById("folderPassword");
 const openFolderBtn = document.getElementById("openFolderBtn");
 const folderError = document.getElementById("folderError");
 
+// Background music
 const bgMusic = document.getElementById("bgMusic");
 const bgMusicToggle = document.getElementById("bgMusicToggle");
 
+// Folder-specific music
 const folderMusicMap = {
   "folder-photos": document.getElementById("music-photos"),
   "folder-notes": document.getElementById("music-notes"),
@@ -20,26 +23,37 @@ const folderMusicMap = {
 
 let activeFolderId = null;
 
-// Background music toggle
-bgMusicToggle.addEventListener("click", () => {
-  if (bgMusic.paused) {
-    bgMusic.play().catch(() => {});
-    bgMusicToggle.textContent = "🔇 Pause Music";
-  } else {
+// Stop and reset background music
+function stopBackgroundMusic() {
+  if (!bgMusic.paused) {
     bgMusic.pause();
-    bgMusicToggle.textContent = "🔊 Background Music";
+    bgMusic.currentTime = 0;
   }
-});
+  bgMusicToggle.textContent = "🔊 Background Music";
+}
 
+// Stop and reset all folder music
 function stopAllFolderMusic() {
   Object.values(folderMusicMap).forEach(audio => {
-    if (!audio) return;
-    audio.pause();
-    audio.currentTime = 0;
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
   });
 }
 
-// Show hint when clicking folder
+// Toggles background music on button click
+bgMusicToggle.addEventListener("click", () => {
+  if (bgMusic.paused) {
+    stopAllFolderMusic();     // make sure no folder audio plays first
+    bgMusic.play().catch(() => {});
+    bgMusicToggle.textContent = "🔇 Pause Music";
+  } else {
+    stopBackgroundMusic();
+  }
+});
+
+// Show hint when clicking folder buttons
 document.querySelectorAll(".folder").forEach(btn => {
   btn.addEventListener("click", () => {
     activeFolderId = btn.dataset.target;
@@ -49,7 +63,7 @@ document.querySelectorAll(".folder").forEach(btn => {
   });
 });
 
-// Open folder + switch music
+// Open folder and play corresponding music
 openFolderBtn.addEventListener("click", () => {
   if (!activeFolderId) {
     alert("Touch a folder first.");
@@ -59,28 +73,22 @@ openFolderBtn.addEventListener("click", () => {
   const correctPassword = folderPasswords[activeFolderId];
   const userInput = folderPasswordInput.value.trim();
 
+  // Hide all folder content and stop all music
   document.querySelectorAll(".folder-content").forEach(fc => fc.classList.add("hidden"));
   stopAllFolderMusic();
+  stopBackgroundMusic();
 
   if (userInput === correctPassword) {
+    // Show content
     document.getElementById(activeFolderId).classList.remove("hidden");
     folderPasswordInput.value = "";
 
-    // Pause background music
-    if (!bgMusic.paused) {
-      bgMusic.pause();
-      bgMusicToggle.textContent = "🔊 Background Music";
-    }
-
-    // Play folder audio
+    // Play the folder's music
     const folderAudio = folderMusicMap[activeFolderId];
     if (folderAudio) {
       folderAudio.play().catch(() => {});
     }
-
   } else {
     folderError.classList.remove("hidden");
   }
 });
-
-
