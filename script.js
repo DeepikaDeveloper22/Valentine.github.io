@@ -24,10 +24,10 @@ let activeFolderId = null;
 bgMusicToggle.addEventListener("click", () => {
   if (bgMusic.paused) {
     bgMusic.play().catch(() => {});
-    bgMusicToggle.textContent = "🔊 Background Music";
+    bgMusicToggle.textContent = "🔇 Pause Music";
   } else {
     bgMusic.pause();
-    bgMusicToggle.textContent = "🔇 Pause Music";
+    bgMusicToggle.textContent = "🔊 Background Music";
   }
 });
 
@@ -66,14 +66,21 @@ openFolderBtn.addEventListener("click", () => {
     document.getElementById(activeFolderId).classList.remove("hidden");
     folderPasswordInput.value = "";
 
-    // Pause background music and play folder music
+    // Pause background music
     if (!bgMusic.paused) {
       bgMusic.pause();
       bgMusicToggle.textContent = "🔊 Background Music";
     }
-    const audio = folderMusicMap[activeFolderId];
-    if (audio) audio.play().catch(() => {});
+
+    // Play folder audio
+    const folderAudio = folderMusicMap[activeFolderId];
+    if (folderAudio) {
+      folderAudio.play().catch(() => {});
+    }
+
   } else {
     folderError.classList.remove("hidden");
   }
 });
+
+
