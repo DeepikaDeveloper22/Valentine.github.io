@@ -1,0 +1,86 @@
+body {
+  font-family: system-ui, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 2rem;
+
+  background:
+    linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+    url("background.jpeg") center / cover no-repeat fixed;
+}
+
+.card {
+  background: rgba(255,255,255,0.92);
+  border-radius: 20px;
+  padding: 1.5rem;
+  max-width: 900px;
+  margin: auto;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+}
+
+.folders {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.folder {
+  background: #f1f1f1;
+  color: #333;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.unlock-ui {
+  margin: 1rem 0;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+input {
+  padding: 0.5rem 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.hidden { display: none; }
+
+.hint {
+  margin-top: 0.5rem;
+  font-style: italic;
+  color: #555;
+}
+
+.error { color: #e11d48; }
+
+.folder-content { margin-top: 1rem; }
+
+.photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.5rem;
+}
+
+.photos img,
+.folder-content video {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  display: block;
+}
+
+.music-toggle {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 10;
+  background: #ff5fa2;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+}

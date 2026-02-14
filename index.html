@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Secret Folder ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Background music -->
+  <button id="bgMusicToggle" class="music-toggle">🔊 Background Music</button>
+  <audio id="bgMusic" loop>
+    <source src="bgm.mpeg" type="audio/mpeg" />
+  </audio>
+
+  <!-- Folder-specific music -->
+  <audio id="music-photos" loop>
+    <source src="photo.mpeg" type="audio/mpeg" />
+  </audio>
+  <audio id="music-notes" loop>
+    <source src="notes song.mpeg" type="audio/mpeg" />
+  </audio>
+  <audio id="music-surprise" loop>
+    <source src="suprise audio.mpeg" type="audio/mpeg" />
+  </audio>
+
+  <section class="card">
+    <h2>Secret Folder 📁</h2>
+
+    <div class="folders">
+      <button class="folder" data-target="folder-photos" data-hint="The numbers that remind me why I celebrate two days every year. 🎉">
+        Photos 🔒
+      </button>
+
+      <button class="folder" data-target="folder-notes" data-hint="The moment our words changed everything — a date and a time I’ll never forget. ⏰❤️">
+        Notes 🔒
+      </button>
+
+      <button class="folder" data-target="folder-surprise" data-hint="The numbers you’ve seen me type a hundred times on my phone. 👀📲">
+        Surprise 🔒
+      </button>
+    </div>
+
+    <p id="folderHint" class="hint hidden"></p>
+
+    <div class="unlock-ui">
+      <input id="folderPassword" type="password" placeholder="Enter password to open folder" />
+      <button id="openFolderBtn">Open Folder</button>
+      <p id="folderError" class="error hidden">Wrong password</p>
+    </div>
+
+    <!-- Photos -->
+    <div id="folder-photos" class="folder-content hidden">
+      <h3>Hidden Photos</h3>
+      <div class="photos">
+        <img src="image1.jpeg" alt="Memory 1" />
+        <img src="image2.jpeg" alt="Memory 2" />
+        <img src="image3.jpeg" alt="Memory 3" />
+        <img src="image5.jpeg" alt="Memory 4" />
+      </div>
+    </div>
+
+    <!-- Notes -->
+    <div id="folder-notes" class="folder-content hidden">
+      <h3>This is how I feel about you, my Betterhalf</h3>
+      <p>
+        I don’t always find the right words, but being with you makes everything feel right.
+        You make ordinary days lighter and hard days easier. You bring peace into my chaos
+        and laughter into my silence. I’m grateful for you in ways I can’t fully explain—only feel.
+        If love is a choice, I’m glad I keep choosing you, today and every day I get the chance.
+      </p>
+    </div>
+
+    <!-- Surprise (single video only) -->
+    <div id="folder-surprise" class="folder-content hidden">
+      <h3>A Little Surprise for you, my Love 🎥</h3>
+      <video controls playsinline>
+        <source src="surprise.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <p class="surprise-text">
+        No matter where life takes us, I promise to keep choosing you,
+        to keep growing with you, and to keep creating memories together.
+      </p>
+      <h2>A HAPPY VALENTINE'S DAY LOVE ❤️</h2>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
